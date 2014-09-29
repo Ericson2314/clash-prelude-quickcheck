@@ -1,11 +1,3 @@
-{-# LANGUAGE GADTs #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TypeFamilies #-}
-
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE FlexibleInstances #-}
-
 module Engn1630.Util.MiscProperties where
 
 commutivity :: Eq a => (a -> a -> a) -> (a -> a -> Bool)
