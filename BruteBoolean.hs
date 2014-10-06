@@ -13,6 +13,8 @@ import qualified Data.Map as M
 import           Data.Map (Map)
 import           Data.Word
 
+--import           Debug.Trace
+
 import qualified Test.QuickCheck
 import           Test.QuickCheck hiding ((.&.))
 
@@ -20,63 +22,80 @@ import           Test.QuickCheck hiding ((.&.))
 nand a b = not $ a .&. b
 nor  a b = not $ a .|. b
 
-
-data Expr
-  = Arg Word
-  | Nand Expr Expr
-  | Xor  Expr Expr
+data Gate
+  = Nand
+  | Xor
   deriving (Eq, Ord, Show)
 
-interp :: [Bool] -> Expr -> Bool
+isoGate1 = \case
+  True  -> Nand
+  False -> Xor
+
+isoGate2 = \case
+  Nand -> True
+  Xor  -> False
+
+instance Arbitrary Gate where
+
+  arbitrary = isoGate1 <$> arbitrary
+  
+  shrink l = fmap isoGate1 $ shrink $ isoGate2 l
+
+data Expr gate
+  = Arg Word
+  | Gate gate (Expr gate) (Expr gate)
+  deriving (Eq, Ord, Show)
+
+interp :: [Bool] -> Expr Gate -> Bool
 interp l = \case
-  Arg  n     -> l !! (fromIntegral n)
-  Nand e1 e2 -> r e1 `nand` r e2
-  Xor  e1 e2 -> r e1 `xor`  r e2
+  Arg  n       -> l !! (fromIntegral n)
+  Gate g e1 e2 -> r e1 `f` r e2
+    where f = case g of
+            Nand -> nand
+            Xor  -> xor
 
   where r = interp l
 
+-- can use arg + 1 of each gate type
 
-bruteExpr :: Word -> Word -> Word -> Gen Expr
-bruteExpr numArgs numNands numXors = evalStateT (brute numArgs) (numNands, numXors)
+bruteExpr :: (Ord gate, Arbitrary gate) => Word -> Counters gate -> Gen (Expr gate)
+bruteExpr numArgs  = evalStateT (brute numArgs)
 
-type Counters = (Word, Word)
+type Counters gate = Map gate Word
 
-brute :: Word -> StateT Counters Gen Expr
+brute :: forall gate. (Ord gate, Arbitrary gate)
+      => Word -> StateT (Counters gate) Gen (Expr gate)
 brute numArgs = r
-  where tryBrute :: StateT Counters (MaybeT Gen) Expr
+  where tryBrute :: StateT (Counters gate) (MaybeT Gen) (Expr gate)
         tryBrute = do
-          (choice1 :: Word) <- lift (lift $ (`mod` 2) <$> arbitrary :: MaybeT Gen Word)
+          (choice1 :: Maybe gate) <- lift (lift arbitrary :: MaybeT Gen (Maybe gate))
           case choice1 of
-            0 -> lift (lift $ Arg . (`mod` numArgs) <$> arbitrary :: MaybeT Gen Expr)
-            1 -> bruteOp False
---            2 -> bruteOp True
+            Nothing -> lift (lift $ Arg . (`mod` numArgs) <$> arbitrary :: MaybeT Gen (Expr gate))
+            (Just op) -> bruteOp op
 
-        bruteOp :: Bool -> StateT Counters (MaybeT Gen) Expr
-        bruteOp opT = do
-          modify $ \(nands , xors) -> case opT of
-            True  -> (nands - 1 , xors)
-            False -> (nands     , xors - 1)
+        bruteOp :: gate -> StateT (Counters gate) (MaybeT Gen) (Expr gate)
+        bruteOp op = do
 
-          -- check count
-          do (nands, xors) <- get
-             guard $ nands >= 0 && xors >= 0
+          -- TODO don't lookup map twice
+          do guard . M.member op =<< get
+             let f = \case
+                   0 -> Nothing
+                   c -> Just $ c - 1
+             modify $ M.update f op
 
-          let op = case opT of
-                False -> Nand
-                True  -> Xor
-
-          let node :: StateT Counters Gen Expr
-              node = op <$> r <*> r
+          let node :: StateT (Counters gate) Gen (Expr gate)
+              node = Gate op <$> r <*> r
 
           mapStateT lift node
 
-        r :: StateT Counters Gen Expr
+        -- recur, trying until something works
+        r :: StateT (Counters gate) Gen (Expr gate)
         r = do
           s <- get
-          let f :: Gen (Maybe (Expr, Counters))
+          let f :: Gen (Maybe (Expr gate, Counters gate))
               f = runMaybeT $ runStateT tryBrute s
           (a, s') <- lift $ whileNothing f
-          put s'
+          put {- $ traceShowId -} s'
           return a
 
 
