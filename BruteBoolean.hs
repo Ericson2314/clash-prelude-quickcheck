@@ -26,8 +26,8 @@ import           CLaSH.Sized.Vector
 import           CLaSH.Promoted.Nat
 
 
-nand a b = not $ a .&. b
-nor  a b = not $ a .|. b
+nand a b = complement $ a .&. b
+nor  a b = complement $ a .|. b
 
 
 data Expr gate
