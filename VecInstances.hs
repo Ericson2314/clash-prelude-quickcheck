@@ -38,6 +38,7 @@ compare' Nil     Nil     = EQ
 compare' (x:>xs) (y:>ys) = case compare x y of
   EQ    -> compare' xs $ unsafeCoerce ys
   other -> other
+compare' _ _ = error "impossible"
 
 instance (Ord a) => Ord (Vec n a) where
   compare = compare'
