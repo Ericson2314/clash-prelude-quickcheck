@@ -9,18 +9,22 @@ import           CLaSH.Prelude      hiding (lift)
 import           CLaSH.Sized.Vector
 import           CLaSH.Promoted.Nat
 
-iso1 = \case False -> L
-             True  -> H
+import qualified CLaSH.Sized.Vector as V
 
-iso2 = \case L -> False
-             H -> True
+iso1 :: Bool -> Bit
+iso1 = \case False -> 0
+             True  -> 1
 
-instance Arbitrary Bit where
-  arbitrary = iso1 <$> arbitrary
-  shrink l = fmap iso1 $ shrink $ iso2 l
+iso2 :: Bit -> Bool
+iso2 = \case 0 -> False
+             1 -> True
+             _ -> error"impossible"
+
+instance KnownNat n => Arbitrary (BitVector n) where
+  arbitrary = pack <$> (V.repeat <$> iso1 <$> arbitrary :: Gen (Vec n Bit))
+--  shrink l  = fmap iso1 $ shrink $ iso2 l
 
 
 inv :: Bits a => a -> a
 inv = complement
-
 

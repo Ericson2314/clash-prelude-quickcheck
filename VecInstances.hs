@@ -8,10 +8,13 @@
 
 module Engn1630.Util.VecInstances where
 
+import           Control.Applicative
+import           Control.Monad
+
 import qualified Test.QuickCheck
 import           Test.QuickCheck hiding ((.&.))
 
-import           Unsafe.Coerce              (unsafeCoerce)
+import           Unsafe.Coerce (unsafeCoerce)
 
 import           CLaSH.Prelude
 import           CLaSH.Sized.Vector
@@ -26,7 +29,7 @@ arb' = \case
 shrink' :: Arbitrary a => Vec n a -> [Vec n a]
 shrink' = \case
   Nil     -> [Nil]
-  a :> as -> concat $ map (\x -> map (:> x) $ shrink a) (shrink' as)
+  a :> as -> join $ (\x -> (:> x) <$> shrink a) <$> shrink' as
 
 instance (KnownNat n, Arbitrary a) => Arbitrary (Vec n a) where
   arbitrary = withSNat $ arb' . toUNat
