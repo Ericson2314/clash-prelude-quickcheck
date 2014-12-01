@@ -15,7 +15,7 @@ import           CLaSH.Promoted.Nat
 import           Engn1630.Util.BitInstances
 import           Engn1630.Util.VecInstances
 
-instance (BitVector (Unsigned a), KnownNat (BitSize (Unsigned a)))
+instance (BitPack (Unsigned a), KnownNat (BitSize (Unsigned a)))
          => Arbitrary (Unsigned a) where
-  arbitrary = fromBV <$> arbitrary
-  shrink    = fmap fromBV . shrink . toBV
+  arbitrary = unpack <$> arbitrary
+  shrink    = fmap unpack . shrink . pack
