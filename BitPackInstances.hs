@@ -1,7 +1,7 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
-module Engn1630.Util.BitVectorInstances where
+module Engn1630.Util.BitPackInstances where
 
 import           Data.Bits
 
