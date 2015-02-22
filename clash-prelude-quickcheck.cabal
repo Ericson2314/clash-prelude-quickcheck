@@ -16,7 +16,7 @@ library
                      , CLaSH.QuickCheck.SignalInstances
                      , CLaSH.QuickCheck.VecInstances
   -- other-modules:
-  other-extensions:    ScopedTypeVariables
+  extensions:          ScopedTypeVariables
                      , LambdaCase
                      , TypeOperators
                      , DataKinds
