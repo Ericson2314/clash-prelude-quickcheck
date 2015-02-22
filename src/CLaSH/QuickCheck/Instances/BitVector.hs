@@ -1,4 +1,4 @@
-module CLaSH.QuickCheck.BitInstances where
+module CLaSH.QuickCheck.Instances.BitVector where
 
 import           Prelude            hiding (sequence)
 

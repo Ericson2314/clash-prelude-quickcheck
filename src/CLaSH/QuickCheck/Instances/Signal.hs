@@ -1,4 +1,4 @@
-module CLaSH.QuickCheck.SignalInstances where
+module CLaSH.QuickCheck.Instances.Signal where
 
 import           Data.Bits
 

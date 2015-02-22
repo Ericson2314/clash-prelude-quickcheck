@@ -1,4 +1,4 @@
-module CLaSH.QuickCheck.VecInstances where
+module CLaSH.QuickCheck.Instances.Vec where
 
 import           Control.Applicative
 import           Control.Monad

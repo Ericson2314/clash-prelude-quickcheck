@@ -1,4 +1,4 @@
-module CLaSH.QuickCheck.BitPackInstances where
+module CLaSH.QuickCheck.Instances.BitPack where
 
 import           Data.Bits
 
@@ -9,8 +9,9 @@ import           CLaSH.Prelude      hiding (lift)
 import           CLaSH.Sized.Vector
 import           CLaSH.Promoted.Nat
 
-import           CLaSH.QuickCheck.BitInstances
-import           CLaSH.QuickCheck.VecInstances
+import           CLaSH.QuickCheck.Instances.BitVector
+import           CLaSH.QuickCheck.Instances.Vec
+
 
 instance (BitPack (Unsigned a), KnownNat (BitSize (Unsigned a)))
          => Arbitrary (Unsigned a) where

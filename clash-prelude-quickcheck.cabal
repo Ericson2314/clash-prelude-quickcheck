@@ -8,10 +8,10 @@ extra-source-files:  README.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     CLaSH.QuickCheck.BitInstances
-                     , CLaSH.QuickCheck.BitPackInstances
-                     , CLaSH.QuickCheck.SignalInstances
-                     , CLaSH.QuickCheck.VecInstances
+  exposed-modules:     CLaSH.QuickCheck.Instances.BitVector
+                     , CLaSH.QuickCheck.Instances.BitPack
+                     , CLaSH.QuickCheck.Instances.Signal
+                     , CLaSH.QuickCheck.Instances.Vec
   -- other-modules:
   extensions:          ScopedTypeVariables
                      , LambdaCase
