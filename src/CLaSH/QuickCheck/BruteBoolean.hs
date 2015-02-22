@@ -4,7 +4,7 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 
-module Engn1630.Util.BruteBoolean where
+module CLaSH.QuickCheck.BruteBoolean where
 
 import           Control.Applicative
 import           Control.Monad.State

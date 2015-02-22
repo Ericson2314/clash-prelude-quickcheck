@@ -1,7 +1,7 @@
 {-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
-module Engn1630.Util.BitPackInstances where
+module CLaSH.QuickCheck.BitPackInstances where
 
 import           Data.Bits
 
@@ -12,8 +12,8 @@ import           CLaSH.Prelude      hiding (lift)
 import           CLaSH.Sized.Vector
 import           CLaSH.Promoted.Nat
 
-import           Engn1630.Util.BitInstances
-import           Engn1630.Util.VecInstances
+import           CLaSH.QuickCheck.BitInstances
+import           CLaSH.QuickCheck.VecInstances
 
 instance (BitPack (Unsigned a), KnownNat (BitSize (Unsigned a)))
          => Arbitrary (Unsigned a) where

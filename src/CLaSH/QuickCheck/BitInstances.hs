@@ -2,7 +2,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeFamilies #-}
 
-module Engn1630.Util.BitInstances where
+module CLaSH.QuickCheck.BitInstances where
 
 import           Prelude            hiding (sequence)
 

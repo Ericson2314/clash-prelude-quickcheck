@@ -1,4 +1,4 @@
-module Engn1630.Util.MiscProperties where
+module CLaSH.QuickCheck.MiscProperties where
 
 commutivity :: Eq a => (a -> a -> a) -> (a -> a -> Bool)
 commutivity f = \a b -> f a b == f b a

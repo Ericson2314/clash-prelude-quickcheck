@@ -1,7 +1,7 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 
-module Engn1630.Util.QuickCheckEquality where
+module CLaSH.QuickCheck.QuickCheckEquality where
 
 import           Data.Bits
 import           Data.Maybe

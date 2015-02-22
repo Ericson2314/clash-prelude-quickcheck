@@ -6,7 +6,7 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 
-module Engn1630.Util.VecInstances where
+module CLaSH.QuickCheck.VecInstances where
 
 import           Control.Applicative
 import           Control.Monad

@@ -1,4 +1,4 @@
-module Engn1630.Util.SignalInstances where
+module CLaSH.QuickCheck.SignalInstances where
 
 import           Data.Bits
 

@@ -8,15 +8,17 @@ extra-source-files:  README.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     BitInstances
-                     , BitPackInstances
-                     , BruteBoolean
-                     , MiscProperties
-                     , QuickCheckEquality
-                     , SignalInstances
-                     , VecInstances
+  exposed-modules:     CLaSH.QuickCheck.BitInstances
+                     , CLaSH.QuickCheck.BitPackInstances
+                     , CLaSH.QuickCheck.BruteBoolean
+                     , CLaSH.QuickCheck.MiscProperties
+                     , CLaSH.QuickCheck.QuickCheckEquality
+                     , CLaSH.QuickCheck.SignalInstances
+                     , CLaSH.QuickCheck.VecInstances
   -- other-modules:
-  other-extensions:    TypeOperators
+  other-extensions:    ScopedTypeVariables
+                     , LambdaCase
+                     , TypeOperators
                      , DataKinds
                      , TypeFamilies
                      , UndecidableInstances
