@@ -23,8 +23,7 @@ iso1 = \case False -> 0
 
 iso2 :: Bit -> Bool
 iso2 = \case 0 -> False
-             1 -> True
-             _ -> error"impossible"
+             _ -> True
 
 instance KnownNat n => Arbitrary (BitVector n) where
   arbitrary = fmap pack $ sequence $ V.repeat $ iso1 <$> arbitrary
