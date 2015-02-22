@@ -10,9 +10,6 @@ cabal-version:       >=1.10
 library
   exposed-modules:     CLaSH.QuickCheck.BitInstances
                      , CLaSH.QuickCheck.BitPackInstances
-                     -- , CLaSH.QuickCheck.BruteBoolean
-                     , CLaSH.QuickCheck.MiscProperties
-                     , CLaSH.QuickCheck.QuickCheckEquality
                      , CLaSH.QuickCheck.SignalInstances
                      , CLaSH.QuickCheck.VecInstances
   -- other-modules:
