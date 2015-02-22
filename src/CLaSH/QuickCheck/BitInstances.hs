@@ -1,7 +1,3 @@
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TypeFamilies #-}
-
 module CLaSH.QuickCheck.BitInstances where
 
 import           Prelude            hiding (sequence)

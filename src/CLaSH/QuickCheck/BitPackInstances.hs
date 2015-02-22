@@ -1,6 +1,3 @@
-{-# LANGUAGE UndecidableInstances #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE FlexibleInstances #-}
 module CLaSH.QuickCheck.BitPackInstances where
 
 import           Data.Bits
