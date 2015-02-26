@@ -17,13 +17,8 @@ import           CLaSH.Sized.Vector
 import           CLaSH.Promoted.Nat
 
 
-arb' :: Arbitrary a => UNat n -> Gen (Vec n a)
-arb' = \case
-  UZero     -> return Nil
-  (USucc n) -> (:>) <$> arbitrary <*> arb' n
-
 instance (KnownNat n, Arbitrary a) => Arbitrary (Vec n a) where
-  arbitrary = withSNat $ arb' . toUNat
+  arbitrary = sequence $ repeat arbitrary
   shrink x  = sequence $ shrink <$> x
 
 instance (Ord a) => Ord (Vec n a) where
