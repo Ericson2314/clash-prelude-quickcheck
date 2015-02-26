@@ -1,4 +1,4 @@
-module CLaSH.QuickCheck.Instances.BitVector where
+module CLaSH.QuickCheck.Instances.BitVector () where
 
 import           Prelude ()
 

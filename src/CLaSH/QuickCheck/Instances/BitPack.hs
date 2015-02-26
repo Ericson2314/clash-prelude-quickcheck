@@ -1,4 +1,4 @@
-module CLaSH.QuickCheck.Instances.BitPack where
+module CLaSH.QuickCheck.Instances.BitPack () where
 
 import           Data.Bits
 

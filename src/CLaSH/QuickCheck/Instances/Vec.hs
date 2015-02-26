@@ -1,5 +1,4 @@
-{-# LANGUAGE InstanceSigs #-}
-module CLaSH.QuickCheck.Instances.Vec where
+module CLaSH.QuickCheck.Instances.Vec () where
 
 import           Prelude ()
 
