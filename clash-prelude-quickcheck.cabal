@@ -36,9 +36,9 @@ library
                      , GADTs
                      , KindSignatures
 
-  build-depends:       base           >=4.7 && <4.8
+  build-depends:       base           ==4.7.*
                      , QuickCheck     >=2.7 && <2.8
-                     , clash-prelude  >=0.6 && <0.7
+                     , clash-prelude  ==0.7.*
                      , mtl            >=2.1 && <2.3
                      , containers     >=0.5 && <0.6
 
