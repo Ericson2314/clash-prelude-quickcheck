@@ -1,16 +1,11 @@
 module CLaSH.QuickCheck.Instances.BitPack () where
 
-import           Data.Bits
+import Test.QuickCheck
 
-import qualified Test.QuickCheck
-import           Test.QuickCheck
+import CLaSH.Prelude
 
-import           CLaSH.Prelude      hiding (lift)
-import           CLaSH.Sized.Vector
-import           CLaSH.Promoted.Nat
-
-import           CLaSH.QuickCheck.Instances.BitVector
-import           CLaSH.QuickCheck.Instances.Vec
+import CLaSH.QuickCheck.Instances.BitVector ()
+import CLaSH.QuickCheck.Instances.Vec ()
 
 
 instance (BitPack (Unsigned a), KnownNat (BitSize (Unsigned a)))

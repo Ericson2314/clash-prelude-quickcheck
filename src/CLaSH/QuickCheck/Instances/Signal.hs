@@ -1,16 +1,9 @@
 module CLaSH.QuickCheck.Instances.Signal () where
 
-import           Data.Bits
+import Test.QuickCheck
 
-import           Control.Applicative
-
-import qualified Test.QuickCheck
-import           Test.QuickCheck
-
-import           CLaSH.Prelude.Explicit hiding (lift)
-import           CLaSH.Signal
-import           CLaSH.Sized.Vector
-import           CLaSH.Promoted.Nat
+import CLaSH.Prelude
+import CLaSH.Prelude.Explicit
 
 
 instance Arbitrary a => Arbitrary (Signal' clk a) where

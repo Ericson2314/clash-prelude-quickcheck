@@ -1,18 +1,8 @@
 module CLaSH.QuickCheck.Instances.BitVector () where
 
-import           Prelude ()
+import Test.QuickCheck
 
-import           Data.Bits
-import           Data.Traversable
-
-import qualified Test.QuickCheck
-import           Test.QuickCheck
-
-import           CLaSH.Prelude hiding (sequence, lift)
-import           CLaSH.Sized.Vector
-import           CLaSH.Promoted.Nat
-
-import qualified CLaSH.Sized.Vector as V
+import CLaSH.Prelude
 
 
 iso1 :: Bool -> Bit
@@ -24,7 +14,7 @@ iso2 = \case 0 -> False
              _ -> True
 
 instance KnownNat n => Arbitrary (BitVector n) where
-  arbitrary = fmap pack $ sequence $ V.repeat $ iso1 <$> arbitrary
-  shrink v  = fmap pack x
-    where x :: [Vec n Bit]
-          x = (fmap . fmap) iso1 $ sequence $ shrink <$> iso2 <$> unpack v
+  arbitrary = fmap pack $ sequence $ CLaSH.Prelude.repeat $ iso1 <$> arbitrary
+  shrink v  = fmap pack vs
+    where vs :: [Vec n Bit]
+          vs = (fmap . fmap) iso1 $ sequence $ shrink <$> iso2 <$> unpack v
